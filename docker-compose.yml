@@ -7,6 +7,11 @@ services:
         - BRAND=${BRAND}
         - VERSION=${TAG}
     image: arnaudhb/docker-fahclient:${TAG}
+    deploy:
+        resources:
+            limits:
+                cpus: ${CPU_COUNT}
+                memory: ${MEM_AMT}
     volumes:
       - "./logs:/var/lib/fahclient/logs"
     ports:
@@ -20,3 +25,4 @@ services:
       - FAHCLIENT_PASSKEY=${FAHCLIENT_PASSKEY}
       - FAHCLIENT_TEAM=${FAHCLIENT_TEAM}
       - FAHCLIENT_USER=${FAHCLIENT_USER}
+      - TZ=${TZ}
