@@ -8,7 +8,7 @@ ARG BRAND
 ARG VERSION
 
 # install packages needed by fahclient installer
-RUN apt-get update && apt-get install -y bzip2
+RUN apt-get update && apt-get install -y bzip2 tzdata
 
 # add files to image
 COPY docker-entrypoint.sh /
@@ -22,6 +22,9 @@ RUN dpkg -x ./fahclient.deb ./deb &&\
  rm -rf deb &&\
  chmod u+x /docker-entrypoint.sh &&\
  rm -rf /var/lib/apt/lists/*
+
+# Timezone var
+ENV TZ=${TZ}
 
 # go to homedir
 WORKDIR /var/lib/fahclient
