@@ -10,8 +10,8 @@ services:
     deploy:
         resources:
             limits:
-                cpus: ${CPU_COUNT}
-                memory: ${MEM_AMT}
+                cpus: "${CPU_COUNT}"
+                memory: "${MEM_AMT}"
     volumes:
       - "./logs:/var/lib/fahclient/logs"
     ports:
