@@ -1,19 +1,20 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # non interactive mode
 ENV DEBIAN_FRONTEND=noninteractive
 
 # build args
 ARG BRAND
-ARG VERSION
+ARG TAG
 
 # install packages needed by fahclient installer
-RUN apt-get update && apt-get install -y bzip2 tzdata
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y bzip2 tzdata
 
 # add files to image
 COPY docker-entrypoint.sh /
 COPY add/config.xml /etc/fahclient/
-ADD https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${BRAND}/fahclient_${VERSION}_amd64.deb /fahclient.deb
+ADD https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/${BRAND}/fahclient_${TAG}_amd64.deb /fahclient.deb
 
 # do not properly install package, but only retrieve binaries
 RUN dpkg -x ./fahclient.deb ./deb &&\

@@ -5,8 +5,8 @@ services:
       context: .
       args:
         - BRAND=${BRAND}
-        - VERSION=${TAG}
-    image: arnaudhb/docker-fahclient:${TAG}
+        - TAG=${TAG}
+    image: arnaudhb/docker-fahclient:latest
     deploy:
         resources:
             limits:
